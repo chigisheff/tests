@@ -1,0 +1,156 @@
+body{
+    min-width: 320px;
+}
+#content {
+    position: relative;   
+}
+#content a {
+    color: #79C;
+    fill: #79C;
+}
+#content .grid {
+    position: relative;
+    background: rgba(255, 255, 200, 0.5);
+    margin-left: auto; margin-right: auto;
+    max-width: 1400px;
+    display: block;
+    min-height: 720px;
+    /*grid-template-columns: repeat(1, minmax(250px, auto));
+    column-gap: 20px;
+    row-gap: 20px;*/
+}
+#content .item {
+    position: relative;
+    display:  block;
+    background: rgba(200, 255, 255, 0.5);
+    box-shadow: 0 0 0 3px #000;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    min-width: 300px;
+    min-height: 720px;
+    
+}
+/*#content .item input, #content .item select{position: absolute; top: 0;left: 0; max-width: 385px; min-height: 10px;}
+#content .item input, #content .item input:focus {outline: none};
+*/
+#content .item .div {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;  
+    background: #930;
+    color:  #000;
+    cursor: text;
+    
+}
+#content .item .div .header{
+    position: relative;
+    width: 70%;
+    max-width: 450px;
+    height: 60px;
+    background-color:  aliceblue;
+    margin: 20px;
+    overflow: hidden;
+}
+#content .item .div .header .h_number{
+    display: block;
+    width: 10%;
+    height: 100%;
+    float: left;
+}
+#content .item .div .header .h_content{
+    display: block;
+    width: 89%;
+    height: 100%;
+    float: right;
+}
+#content .item .div .post{
+    position: relative;
+    width: 90%;
+    /*/aspect-ratio: 16/1;*/
+    background-color: darkseagreen;
+    margin: auto;
+    margin-bottom: 25px;
+    min-height: 60px;
+    
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+/* отсюда управляем инпут-селектом */
+ li{color: black; background-color: white;}
+ .custom-select {
+            width: 300px;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+         .svg-arrow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            border: 5px solid transparent;
+            border-top-color: #333; /* Стрелка вниз */
+        }
+        .input_forma_new {
+            font-size: 14px;
+        }
+        .select2-container--open .select2-dropdown {
+            border: 1px solid #ccc;
+            max-height: 500px; /* Как size="5" */
+            overflow-y: auto;
+        }
+        #sel_org {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        z-index: 5; /* Под input, но выше фона */
+        opacity: 1; /* Убеждаемся, что виден */
+        box-sizing: border-box;
+        min-height: 10px;
+    }
+
+    #sel_org option[disabled] {
+        color: #999;
+        font-style: italic;
+    }
+        .select-wrapper {
+            width: 300px;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        .select2-container .select2-selection--single {
+            height: 34px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 34px;
+            padding-left: 10px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            display: none; /* Скрываем стандартную стрелку */
+        }
+        .svg-arrow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            border: 5px solid transparent;
+            border-top-color: #333; /* Кастомная стрелка вниз */
+        }
+        .input_forma_new {
+            font-size: 14px;
+        }
+        .select2-container--open .select2-dropdown {
+            border: 1px solid #ccc;
+            min-height: 200px; /* Эквивалент size="5" */
+            overflow-y: auto;
+        }
+        .option-disabled {
+            color: #999;
+            background: #f5f5f5;
+        }
