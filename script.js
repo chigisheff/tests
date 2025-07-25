@@ -1,58 +1,44 @@
-        // Функция фильтрации
-    function CAT_ADM_SK_Find(eto, term) {
-        console.log('буБу, term: ' + term);
-        var text = (term || '').toLowerCase();
-        var select = $(eto);
-        var options = select.find('option');
-
-        if (options.length) {
-            options.each(function() {
-                var optionText = $(this).text().toLowerCase();
-                // Показываем опцию, если текст совпадает или это отключённая опция
-                $(this).prop('hidden', !(optionText.includes(text) || $(this).is(':disabled')));
-            });
+    var colorSpan;
+    var colorInput;
+    $(document).ready(function(){
+        colorSpan = $('#counter').css('color');
+        colorInput = $('[data-set="alias"]').css('color');
+    });
+// Функция фильтрации
+    function CAT_ADM_KeyUp(e, eto, fun, opt) {
+        const out = '/16';
+        var valueInput = $(eto).val();
+        if(/[а-яА-ЯЁё]/.test(valueInput)){
+            $(eto).css('color','red');
+        } else {
+            $(eto).css('color',colorInput);
         }
-        // Обновляем Select2
-        $(eto).trigger('change.select2');
+            
+        $('#counter').text(valueInput.length+out);
+        if(valueInput.length > 16){
+            $('#counter').css('color','red');
+        }else{
+            $('#counter').css('color',colorSpan);
+        }
+        
+        var e = e || window.event;
+        var fun = (fun ? fun : 'CAT_ADM_Auth');
+        if (e.keyCode == 13) {
+            window[fun](opt ? opt : eto);
+        }
     }
-
-    // Функция сохранения выбора
-    function save_org_sel() {
-        console.log('бу');
-        /* Раскомментируйте для отправки на сервер
+    function CAT_ADM_Auth(eto) {
         EXPORT_MODAL();
-        let id_org = $("#sel_org").val();
-        $.post(H_ARR['hos'] + '/catalog/adm/zk/get.php', { save_org: 1, zk: H_ARR['GET']['zk'], id_org: id_org }, function (json) {
-            EXPORT_MODAL({ fade: 200 });
+        var opt = { auth_init: 1 };
+        var par = $(eto).parent();
+        opt['log'] = $(par).find('[name="log"]').val();
+        opt['pas'] = $(par).find('[name="pas"]').val();
+        opt['token_access'] = sessionStorage.getItem('token_access');
+        $.post(H_ARR['hos'] + '/catalog/adm/get.php', opt, function (json) {
+            EXPORT_MODAL({ text: json['title'], fade: (json['error'] ? 3600 : 200) });
+            if (!json['error']) {
+                //EXPORT_ADD_COOKIE({ name: 'authsid', val: json['sid'], time: 7776000 });
+                setTimeout(() => { location.reload(); }, 200);
+                }
         }, 'json');
-        */
     }
-
-    $(document).ready(function() {
-        // Инициализация Select2
-        $('#sel_org').select2({
-            placeholder: "Поиск организации",
-            minimumResultsForSearch: 0 // Всегда показывать поле поиска 
-        });
-        
-        $('#sel_org').on('select2:open', function(e) {
-        // Событие срабатывает при открытии выпадающего списка
-        console.log('Select2 открыт');
-
-        // Добавление обработчика события для ввода текста
-            $('.select2-search__field').on('input', function() {
-              const searchTerm = $(this).val();
-              console.log('Ввод текста:', searchTerm);
-              // Здесь можно добавить логику обработки введенного текста
-            });
-        });
-
-        $('#sel_org').on('select2:select', function (e) {
-            // Событие срабатывает при выборе элемента
-            const selectedItem = e.params.data;
-            console.log('Выбран элемент:', selectedItem);
-            save_org_sel();
-            // Здесь можно добавить логику обработки выбранного элемента
-        });
-        
-});
